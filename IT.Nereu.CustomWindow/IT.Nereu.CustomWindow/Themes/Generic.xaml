@@ -1,0 +1,75 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:base="clr-namespace:IT.Nereu.CustomWindow.Base">
+
+    <SolidColorBrush x:Key="Background" Color="#293440"/>
+
+    <Style TargetType="{x:Type base:TitleButton}">
+        <Setter Property="Height" Value="{x:Static base:TitleBar.BUTTON_HEIGHT}"/>
+        <Setter Property="Width" Value="{x:Static base:TitleBar.BUTTON_WIDTH}"/>
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type base:TitleButton}">
+                    <Border Name="BorderButton"
+                            Background="Transparent">
+                        <ContentPresenter Content="{Binding Path=Icon, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" 
+                                    TargetName="BorderButton"
+                                    Value="{Binding Path=MouseOverBackground, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" 
+                                    TargetName="BorderButton"
+                                    Value="{Binding Path=PressedBackground, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type base:TitleBar}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type base:TitleBar}">
+                    <Border Name="TitleBar" DockPanel.Dock="Top" 
+                            Background="{StaticResource Background}">
+                        <Grid Height="{x:Static base:TitleBar.BUTTON_HEIGHT}" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="22"/>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="{x:Static base:TitleBar.GRID_WIDTH}"/>
+                                <ColumnDefinition Width="{x:Static base:TitleBar.GRID_WIDTH}"/>
+                                <ColumnDefinition Width="{x:Static base:TitleBar.GRID_WIDTH}"/>
+                            </Grid.ColumnDefinitions>
+
+                            <base:TitleButton Grid.Column="2" 
+                                              x:Name="MinButton" 
+                                              MouseOverBackground="#191F26"
+                                              PressedBackground="#000000"/>
+                            <!--Click="MinButton_MouseLeftButtonDown" />-->
+
+                            <base:TitleButton Grid.Column="3" 
+                                              x:Name="MaxButton" 
+                                              MouseOverBackground="#191F26"
+                                              PressedBackground="#000000"/>
+                            <!--Click="MaxButton_MouseLeftButtonDown" />-->
+
+                            <base:TitleButton Grid.Column="4" 
+                                              x:Name="CloseButton" 
+                                              MouseOverBackground="#FF0000"
+                                              PressedBackground="#800000"/>
+                            <!--Click="CloseButton_MouseLeftButtonDown" />-->
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
